@@ -1,0 +1,21 @@
+// You can copy this pipeline code into a Jenkins job and run it. Jenkins will prompt you to enter a string, and after entering the value, 
+// it will display the uppercase version of the string in the console output.
+
+pipeline {
+    agent any
+    
+    parameters {
+        string(name: 'inputString', defaultValue: '', description: 'Enter a string:')
+    }
+    
+    stages {
+        stage('Uppercase String') {
+            steps {
+                script {
+                    def upperCaseString = inputString.toUpperCase()
+                    echo "Uppercase string: ${upperCaseString}"
+                }
+            }
+        }
+    }
+}
