@@ -8,10 +8,10 @@ pipeline {
     stages {
         stage ('Build') {
             steps {
-                echo "Building..."
+                echo "Building the job."
             }
         }
-        stage ('Deploy to non-production environments') {
+        stage ('Deploy to the non-production environments.') {
             when {
                 // Only deploy if the environment is NOT production
                 expression { params.ENVIRONMENT != 'PRODUCTION' }
@@ -20,13 +20,13 @@ pipeline {
                 echo "Deploying to ${params.ENVIRONMENT}"
             }
         }
-        stage ('Deploy to production environment') {
+        stage ('Deploy to the Production environment.') {
             agent none
             when {
                 expression { params.ENVIRONMENT == 'PRODUCTION' }
             }
             steps {
-                input message: 'Confirm deployment to production...', ok: 'Deploy'
+                input message: 'Confirm deployment to the production environment?', ok: 'Deploy'
                 echo "Deploying to ${params.ENVIRONMENT}"
             }
         }
